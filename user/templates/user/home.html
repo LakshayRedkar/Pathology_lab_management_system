@@ -1,11 +1,11 @@
 {% extends 'main.html' %} 
 {% block content %}
-<h1>Home Template</h1>
-<h1>
+{% load static %}
+  
   {% comment %} <div>
     <a href="{% url 'create-room' %}">Create Room</a>
   <div>
-    {% for room in rooms %}
+    
         <div>
           <a href="{% url 'update-room' room.id %}">Edit</a>
           <a href="{% url 'update-room' room.id %}">Delete</a>
@@ -13,12 +13,27 @@
           <h5>{{room.id}} -- <a href="{% url 'room' room.id %}">{{room.name}}</a></h5>
           <small>{{room.topic.name}}</small>
         </div>
-    {% endfor%} {% endcomment %}
+     {% endcomment %}
 
-    {% if request.session.email %}
+    <!-- {% if request.session.email %}
     {{ request.session.email }}
-    {% endif %}
+    {% endif %} -->
+<div class="container">
+      <div class="display-4 text-center pr-5">Book Test</div>
+  <div class="row mt-4 text-center ml-5">
+    {% for tests in test %}
+    <div class="card ml-5" style="width:400px">
+      <img class="card-img-top" src="{% static 'images/' %}{{ tests.lab_test_image}}" alt="Card image">
+      <div class="card-body">
+        <h4 class="card-title text-capitalize">{{ tests.test_name}}</h4>
+        <p class="card-text">₹{{tests.test_cost}}</p>
+        <a href="{% url 'book' tests.test_name %}" class="btn btn-primary">Book</a>
+      </div>
+    </div>
+    {% endfor%}
+
+    
   </div>
 </div>
-</h1>
+
 {% endblock content %}
