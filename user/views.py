@@ -11,6 +11,10 @@ from .models import Book, Patients
 from .models import LabTest
 from .models import BookedTest
 from .models import Book
+from datetime import datetime
+
+input_datetime_format = "%Y-%m-%d %I:%M %p"
+
 # from PLMS.models import Patients 
 # Create your views here. render(request,'user/login_register.html',context)
 
@@ -88,7 +92,9 @@ def register(request):
 def book(request,test_name):
   if request.session.get('user_id'):
     if request.method=='POST':
-      date=request.POST.get('date')+request.POST.get('time')
+      
+      datetime_str=f"{request.POST.get('date')} {request.POST.get('time')}"
+      date = datetime.strptime(datetime_str, input_datetime_format)
       p_id=request.session.get('user_id')
       patients=Patients.objects.get(patient_id=p_id)
       bt=BookedTest(p_id=patients,b_date=date,tests=test_name,booking_status=0)
