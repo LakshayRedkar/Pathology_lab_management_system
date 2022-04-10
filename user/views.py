@@ -106,5 +106,8 @@ def book(request,test_name):
     return render(request,'user/booking.html',context)
   else:
     return redirect('login')
+
+def history(request):
+  return render(request,'user/booking-history.html')
   
   
