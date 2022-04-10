@@ -12,6 +12,8 @@ from .models import LabTest
 from .models import BookedTest
 from .models import Book
 from datetime import datetime
+from django.db.models import DateTimeField
+from django.db.models.functions import Trunc
 
 input_datetime_format = "%Y-%m-%d %I:%M %p"
 
@@ -97,7 +99,7 @@ def book(request,test_name):
       date = datetime.strptime(datetime_str, input_datetime_format)
       p_id=request.session.get('user_id')
       patients=Patients.objects.get(patient_id=p_id)
-      bt=BookedTest(p_id=patients,b_date=date,tests=test_name,booking_status=0)
+      bt=BookedTest(p_id=patients,b_date=date,tests=test_name,booking_status='Requested')
       bt.save()
       return redirect('home')
     # test_name=request.POST.get('email')
@@ -108,6 +110,15 @@ def book(request,test_name):
     return redirect('login')
 
 def history(request):
-  return render(request,'user/booking-history.html')
+   if request.session.get('user_id'):
+    p_id=request.session.get('user_id')
+    bookingdata=BookedTest.objects.filter(p_id=p_id).order_by(
+    Trunc('b_date', 'date', output_field=DateTimeField()).desc(),
+    '-p_id')
+    status={'Requested':0,'Booked':26,'Testing':50,'Completed':100}
+    context={'booking': bookingdata,'status':status}
+    return render(request,'user/booking-history.html',context)
+   else:
+     return redirect('login')
   
   

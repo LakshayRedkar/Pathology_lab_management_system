@@ -31,7 +31,7 @@ class BookedTest(models.Model):
     p_id= models.ForeignKey('Patients', models.DO_NOTHING)
     b_date = models.DateTimeField()
     tests = models.CharField(max_length=25)
-    booking_status = models.IntegerField()
+    booking_status = models.CharField(max_length=40)
 
     # class Meta:
     #     managed = False
