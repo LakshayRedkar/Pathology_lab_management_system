@@ -101,6 +101,7 @@ def book(request,test_name):
       patients=Patients.objects.get(patient_id=p_id)
       bt=BookedTest(p_id=patients,b_date=date,tests=test_name,booking_status='Requested')
       bt.save()
+      messages.success(request,'Booked Suceesfully')
       return redirect('home')
     # test_name=request.POST.get('email')
     print(test_name)

@@ -3,13 +3,14 @@
 {% load static %}
 
 <div class="container offset-1">
-  <div class="row mt-4 ml-4 ">
+  <div class="row mt-4 ml-4 card">
     
-    <form action="" method="post">
+    <form action="" method="post" class="card-body"> 
       {% csrf_token %}
-      <div class="display-4 offset-3  mb-4">Book your test</div>
+      <div class="display-4 offset-4  mb-4">Book your test</div>
       <div class="p-3 p-lg-5 border">
         <div class="form-group row">
+        
           <section class="col-md-5">
             
             <label class="font-weight-bold">Enter Booking Date</label>
@@ -19,11 +20,11 @@
                 <span class="input-group-text fa fa-calendar"></span>
               </div>
             </div>
-    
+          
         </section> 
         <section class="col-md-5">
             
-          <label class="font-weight-bold">Enter Booking Time</label>
+          <label class="font-weight-bold ">Enter Booking Time</label>
           <div class="input-group mb-3">
             <input type='text' class="form-control fa fa-calendar" id='datetimepicker' placeholder="Enter time" name="time"  />
             <div class="input-group-append">
@@ -31,7 +32,8 @@
             </div>
           </div>
   
-      </section>       
+      </section>   
+    </div>    
           <div class="col-md-6">
             <h6 for="c_fname" class="text-black font-weight-bold">Lab Test: <span class="text-danger"></span></h6>
             <div class="font-weight-bold text-capitalize">{{test_name}}</div>
