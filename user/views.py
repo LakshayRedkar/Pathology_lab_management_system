@@ -14,7 +14,7 @@ from .models import Book
 from datetime import datetime
 from django.db.models import DateTimeField
 from django.db.models.functions import Trunc
-
+import time
 input_datetime_format = "%Y-%m-%d %I:%M %p"
 
 # from PLMS.models import Patients 
@@ -120,5 +120,36 @@ def history(request):
     return render(request,'user/booking-history.html',context)
    else:
      return redirect('login')
+def profile(request):
+  if request.session.get('user_id'):
+    p_id=request.session.get('user_id')
+    profile=Patients.objects.get(patient_id=p_id)
+    context={'profile': profile}
+
+    if request.method=="POST":
+      Username=request.POST.get('name')
+      if request.POST.get('pass1') != request.POST.get('pass2'):
+        messages.error(request,'The Password does not match')
+        return render(request,'user/profile.html')
+
+      Password=request.POST.get('pass2')
+   
+      phone=request.POST.get('phone')
+      gender=request.POST.get('gender')
+      up_pat=Patients.objects.get(patient_id=p_id)
+      up_pat.patient_name=Username
+      if request.POST.get('pass2')!="":
+         up_pat.patient_password=Password
+      if request.POST.get('date')!="":
+        up_pat.patient_dob=dob=request.POST.get('date')
+      up_pat.patient_gender=gender
+      up_pat.patient_phone_number=phone
+      up_pat.save()
+      messages.success(request,'The User '+request.POST.get('name')+'Is saved sucessfullt')
+
+
+    return render(request,'user/profile.html',context)
+  else:
+    return redirect('login')
   
   

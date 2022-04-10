@@ -50,5 +50,9 @@ background: linear-gradient(to right, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, F
   background-color: #000D6B;
 }
 
+.text-primary
+{
+  color: #000D6B;
+}
 
 
