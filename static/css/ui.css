@@ -113,4 +113,9 @@ background: linear-gradient(to right, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, F
   font-weight: 600 !important;
 }
 
+.inline
+{
+  display: -webkit-box;
+}
+
 

@@ -160,6 +160,27 @@ def cancel(request,b_id):
       messages.success(request,'The booking is cancelled sucessfullt')
       return redirect('history')
 
+def haematology(request):
+  if request.session.get('user_id'):
+    p_id=request.session.get('user_id')
+    haemoglobin=request.POST.get('haemoglobin')
+    wbc=request.POST.get('wbc')
+    haematocrit=request.POST.get('haematocrit')
+    rbc=request.POST.get('rbc')
+    neutrophilis=request.POST.get('neutrophilis')
+    eosinophils=request.POST.get('eosinophils')
+    basophils=request.POST.get('basophils')
+    lymphocytes=request.POST.get('lymphocytes')
+    monocytes=request.POST.get('monocytes')
+    esr=request.POST.get('esr')
+    bleedingtime=request.POST.get('bleedingtime')
+    blesec=request.POST.get('blesec')
+    clottingtime=request.POST.get('clottingtime')
+    closec=request.POST.get('closec')
+    totalplatelet=request.POST.get('totalplatelet')
+    
+  return render(request,'user/haematology.html')
+
 
     
   

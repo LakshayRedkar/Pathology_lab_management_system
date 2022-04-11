@@ -11,4 +11,5 @@ urlpatterns = [
     path('booking-history/', views.history ,name="history"),
     path('profile/', views.profile ,name="profile"),
     path('delete/<int:b_id>', views.cancel ,name="cancel"),
+    path('haematology/', views.haematology ,name="haematology"),
 ]
