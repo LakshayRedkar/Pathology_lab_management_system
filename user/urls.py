@@ -10,4 +10,5 @@ urlpatterns = [
     path('book/<str:test_name>/', views.book ,name="book"),
     path('booking-history/', views.history ,name="history"),
     path('profile/', views.profile ,name="profile"),
+    path('delete/<int:b_id>', views.cancel ,name="cancel"),
 ]

@@ -152,5 +152,15 @@ def profile(request):
     return render(request,'user/profile.html',context)
   else:
     return redirect('login')
+
+def cancel(request,b_id):
+  if request.session.get('user_id'):
+      p_id=request.session.get('user_id')
+      BookedTest.objects.get(book_id=b_id).delete()
+      messages.success(request,'The booking is cancelled sucessfullt')
+      return redirect('history')
+
+
+    
   
   
